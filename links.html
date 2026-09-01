@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Links dos participantes</title>
+<link rel="stylesheet" href="assets/estilo.css">
+</head>
+<body>
+<main class="cartao largo">
+  <h1>Links individuais</h1>
+  <p class="aviso">Envie para cada pessoa apenas o link dela. Esta página não mostra o
+  resultado de nenhum sorteio.</p>
+  <div id="listas"></div>
+</main>
+
+<script src="assets/dados.js"></script>
+<script>
+const base = location.href.replace(/links\.html.*$/, "") + "index.html?t=";
+const destino = document.getElementById("listas");
+
+for (const [grupo, pessoas] of Object.entries(GRUPOS)) {
+  const titulo = document.createElement("h2");
+  titulo.textContent = "Grupo: " + grupo;
+  destino.appendChild(titulo);
+
+  const tabela = document.createElement("table");
+  tabela.innerHTML = "<tr><th>Pessoa</th><th>Link</th><th></th></tr>";
+  for (const pessoa of pessoas) {
+    const url = base + pessoa.token;
+    const linha = tabela.insertRow();
+    linha.insertCell().textContent = pessoa.nome;
+    linha.insertCell().innerHTML = '<code>' + url + '</code>';
+    const botao = document.createElement("button");
+    botao.textContent = "Copiar";
+    botao.onclick = () => {
+      navigator.clipboard.writeText(url);
+      botao.textContent = "Copiado!";
+      setTimeout(() => (botao.textContent = "Copiar"), 1500);
+    };
+    linha.insertCell().appendChild(botao);
+  }
+  destino.appendChild(tabela);
+}
+</script>
+</body>
+</html>

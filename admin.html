@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sorteio completo</title>
+<link rel="stylesheet" href="assets/estilo.css">
+</head>
+<body>
+<main class="cartao largo" id="cartao">
+  <p class="rotulo">Carregando…</p>
+</main>
+
+<script src="assets/dados.js"></script>
+<script src="assets/sorteio.js"></script>
+<script>
+const cartao = document.getElementById("cartao");
+const params = new URLSearchParams(location.search);
+
+if (params.get("k") !== TOKEN_ADMIN) {
+  cartao.innerHTML = '<h1>Acesso restrito</h1>' +
+    '<p class="aviso erro">Token de administrador inválido.</p>';
+} else {
+  // ?semana=N permite conferir semanas passadas ou futuras.
+  const semana = params.has("semana") ? Number(params.get("semana")) : numeroDaSemana();
+  let html = '<h1>Sorteio completo — semana ' + semana + '</h1>' +
+    '<p class="aviso">Semana atual: ' + numeroDaSemana() +
+    '. Próxima virada: ' + formatarData(proximaSegunda()) +
+    '. Use <code>?k=…&semana=N</code> para ver outra semana.</p>';
+
+  for (const [grupo, pessoas] of Object.entries(GRUPOS)) {
+    html += '<h2>Grupo: ' + grupo + '</h2><table><tr><th>Pessoa</th><th>Tirou</th></tr>';
+    for (const par of sorteioDoGrupo(pessoas, semana)) {
+      html += '<tr><td>' + par.de.nome + '</td><td>' + par.para.nome + '</td></tr>';
+    }
+    html += '</table>';
+  }
+  cartao.innerHTML = html;
+}
+</script>
+</body>
+</html>
