@@ -43,6 +43,8 @@ if (!encontrado) {
   const pares = sorteioDoGrupo(encontrado.pessoas, semana);
   const sorteado = pares[encontrado.indice].para.nome;
   const virada = formatarData(proximaSegunda());
+  // O pronome acompanha o grupo: mulheres tiram mulheres, homens tiram homens.
+  const pron = encontrado.grupo === "mulheres" ? "ela" : "ele";
 
   cartao.innerHTML =
     '<span class="selo">Cuidar uns dos outros</span>' +
@@ -54,9 +56,9 @@ if (!encontrado) {
     '</div>' +
     versiculo +
     '<ul class="cuidados">' +
-      '<li><span class="icone">🙏</span><span>Ore por ela com mais intensidade durante a semana.</span></li>' +
-      '<li><span class="icone">💬</span><span>Mande uma mensagem e pergunte como ela está.</span></li>' +
-      '<li><span class="icone">❤️</span><span>Pergunte se ela precisa de algo ou tem algum pedido de oração.</span></li>' +
+      '<li><span class="icone">🙏</span><span>Ore por ' + pron + ' com mais intensidade durante a semana.</span></li>' +
+      '<li><span class="icone">💬</span><span>Mande uma mensagem e pergunte como ' + pron + ' está.</span></li>' +
+      '<li><span class="icone">❤️</span><span>Pergunte se ' + pron + ' precisa de algo ou tem algum pedido de oração.</span></li>' +
     '</ul>' +
     '<p class="aviso">Mais do que ministrarmos juntos, queremos cuidar uns dos outros como corpo ' +
     'de Cristo. 🫶<br>Guarde segredo — o próximo sorteio começa na segunda-feira, ' + virada + '.</p>';
