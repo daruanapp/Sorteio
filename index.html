@@ -52,7 +52,7 @@ if (!encontrado) {
     '<p class="subtitulo">Esta é a pessoa que você vai cuidar de forma especial nesta semana.</p>' +
     '<div class="revelacao">' +
       '<p class="rotulo">Você tirou</p>' +
-      '<p class="sorteado">' + sorteado + '</p>' +
+      '<p class="sorteado" id="sorteado">&nbsp;</p>' +
     '</div>' +
     versiculo +
     '<ul class="cuidados">' +
@@ -62,6 +62,63 @@ if (!encontrado) {
     '</ul>' +
     '<p class="aviso">Mais do que ministrarmos juntos, queremos cuidar uns dos outros como corpo ' +
     'de Cristo. 🫶<br>O próximo sorteio começa na segunda-feira, ' + virada + '.</p>';
+
+  // Na primeira visita da semana o nome passa numa "roleta" antes de parar no sorteado.
+  const chave = "revelado:" + token + ":" + semana;
+  let jaViu = false;
+  try {
+    jaViu = localStorage.getItem(chave) === "1";
+  } catch (e) {
+    jaViu = true; // sem localStorage (navegação privada), mostra direto
+  }
+
+  const alvo = document.getElementById("sorteado");
+
+  if (jaViu) {
+    alvo.textContent = sorteado;
+    alvo.classList.add("parou");
+  } else {
+    girarRoleta(alvo, encontrado.pessoas, encontrado.pessoa.nome, sorteado, () => {
+      try { localStorage.setItem(chave, "1"); } catch (e) {}
+    });
+  }
+}
+
+// Sorteia nomes do grupo em sequência, desacelerando até parar no nome certo.
+function girarRoleta(alvo, pessoas, proprioNome, sorteado, aoTerminar) {
+  const candidatos = pessoas
+    .map((p) => p.nome)
+    .filter((nome) => nome !== proprioNome && nome !== sorteado);
+
+  alvo.classList.add("girando");
+
+  const passos = [];
+  for (let i = 0; i < 26; i++) {
+    passos.push(candidatos[i % candidatos.length]);
+  }
+  // Embaralha para a sequência não parecer uma lista em ordem.
+  for (let i = passos.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [passos[i], passos[j]] = [passos[j], passos[i]];
+  }
+  passos.push(sorteado);
+
+  let i = 0;
+  function proximo() {
+    alvo.textContent = passos[i];
+    const ultimo = i === passos.length - 1;
+    if (ultimo) {
+      alvo.classList.remove("girando");
+      alvo.classList.add("parou");
+      if (aoTerminar) aoTerminar();
+      return;
+    }
+    // Intervalo cresce de ~55ms até ~340ms: efeito de roleta perdendo força.
+    const progresso = i / (passos.length - 1);
+    i++;
+    setTimeout(proximo, 55 + Math.pow(progresso, 3) * 285);
+  }
+  proximo();
 }
 </script>
 </body>
