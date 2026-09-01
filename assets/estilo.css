@@ -1,11 +1,12 @@
+/* Paleta tirada da identidade visual da Paz Church Embu-Guaçu. */
 :root {
-  --fundo: #0f1020;
-  --cartao: #1a1b33;
-  --borda: #2e3055;
-  --texto: #f2f3ff;
-  --suave: #a2a6cc;
-  --destaque: #ffcc66;
-  --verde: #6fe0a8;
+  --navy: #003770;
+  --navy-fundo: #002a56;
+  --azul-medio: #3978ae;
+  --azul-claro: #cfe2f3;
+  --gelo: #f2f7fc;
+  --branco: #ffffff;
+  --dourado: #e8b04b;
 }
 
 * { box-sizing: border-box; }
@@ -13,70 +14,152 @@
 body {
   margin: 0;
   min-height: 100vh;
-  padding: 32px 16px;
+  padding: 28px 16px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  background: radial-gradient(circle at 20% 0%, #23244a 0%, var(--fundo) 60%);
-  color: var(--texto);
+  gap: 18px;
+  background:
+    radial-gradient(circle at 15% -5%, #7fb0da 0%, rgba(127, 176, 218, 0) 55%),
+    linear-gradient(180deg, #a9cbe8 0%, var(--gelo) 45%, #e4eef8 100%);
+  color: var(--navy);
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+}
+
+.marca {
+  display: block;
+  width: 190px;
+  max-width: 60%;
+  margin: 4px auto 0;
 }
 
 .cartao {
   width: 100%;
   max-width: 520px;
-  padding: 28px;
-  border: 1px solid var(--borda);
-  border-radius: 18px;
-  background: var(--cartao);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  padding: 26px 24px 30px;
+  border-radius: 22px;
+  background: var(--branco);
+  box-shadow: 0 18px 45px rgba(0, 42, 86, 0.18);
   text-align: center;
 }
 
-.cartao.largo { max-width: 760px; text-align: left; }
+.cartao.largo { max-width: 780px; text-align: left; }
 
-h1 { margin: 0 0 6px; font-size: 1.35rem; }
+.selo {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--azul-claro);
+  color: var(--navy);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
-.semana { margin: 0 0 22px; color: var(--suave); font-size: 0.9rem; }
+h1 {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
 
-.rotulo { margin: 0; color: var(--suave); font-size: 0.95rem; }
+.subtitulo { margin: 0; color: var(--azul-medio); font-size: 0.92rem; }
+
+/* Bloco navy com o nome sorteado — mesmo estilo dos cards da agenda semanal. */
+.revelacao {
+  margin: 22px 0 18px;
+  padding: 26px 18px;
+  border-radius: 16px;
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-fundo) 100%);
+  color: var(--branco);
+}
+
+.revelacao .rotulo {
+  margin: 0;
+  color: var(--azul-claro);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
 
 .sorteado {
-  margin: 10px 0 18px;
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: var(--destaque);
+  margin: 10px 0 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.1;
   word-break: break-word;
 }
 
-.aviso { margin: 0; color: var(--suave); font-size: 0.85rem; line-height: 1.5; }
+.versiculo {
+  margin: 0 0 6px;
+  padding: 16px 18px;
+  border-left: 4px solid var(--azul-medio);
+  border-radius: 0 12px 12px 0;
+  background: var(--gelo);
+  color: var(--navy);
+  font-size: 0.92rem;
+  font-style: italic;
+  text-align: left;
+}
 
-.erro { color: #ff9d9d; }
+.versiculo cite {
+  display: block;
+  margin-top: 8px;
+  color: var(--azul-medio);
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
 
-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.cuidados { margin: 18px 0 0; padding: 0; list-style: none; text-align: left; }
 
-th, td { padding: 9px 6px; border-bottom: 1px solid var(--borda); text-align: left; font-size: 0.95rem; }
+.cuidados li {
+  display: flex;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid #e3ecf6;
+  font-size: 0.94rem;
+}
 
-th { color: var(--suave); font-weight: 600; }
+.cuidados li:last-child { border-bottom: none; }
 
-h2 { margin: 26px 0 4px; font-size: 1.05rem; color: var(--verde); }
+.cuidados .icone { flex: 0 0 auto; font-size: 1.05rem; }
 
-h2:first-of-type { margin-top: 14px; }
+.aviso { margin: 16px 0 0; color: var(--azul-medio); font-size: 0.83rem; }
 
-code { color: var(--suave); font-size: 0.8rem; word-break: break-all; }
+.erro { color: #b3261e; }
 
-a { color: var(--destaque); }
+.rodape { margin: 0; color: var(--azul-medio); font-size: 0.75rem; text-align: center; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+
+th, td { padding: 10px 6px; border-bottom: 1px solid #e3ecf6; text-align: left; font-size: 0.93rem; }
+
+th { color: var(--azul-medio); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+h2 {
+  margin: 26px 0 2px;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--azul-medio);
+}
+
+code { color: var(--navy); font-size: 0.78rem; word-break: break-all; }
 
 button {
-  padding: 6px 12px;
-  border: 1px solid var(--borda);
-  border-radius: 8px;
-  background: #262848;
-  color: var(--texto);
-  font-size: 0.8rem;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 999px;
+  background: var(--navy);
+  color: var(--branco);
+  font-size: 0.78rem;
+  font-weight: 600;
   cursor: pointer;
 }
 
-button:hover { background: #32355c; }
+button:hover { background: var(--azul-medio); }

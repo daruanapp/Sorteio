@@ -4,16 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Links dos participantes</title>
+<title>Links do ministério</title>
+<link rel="icon" href="assets/logo.png">
 <link rel="stylesheet" href="assets/estilo.css">
 </head>
 <body>
+<img class="marca" src="assets/logo.png" alt="Paz Church Embu-Guaçu">
+
 <main class="cartao largo">
+  <span class="selo">Cuidar uns dos outros</span>
   <h1>Links individuais</h1>
-  <p class="aviso">Envie para cada pessoa apenas o link dela. Esta página não mostra o
-  resultado de nenhum sorteio.</p>
+  <p class="subtitulo">Envie a cada pessoa apenas o link dela. Esta página não revela nenhum sorteio.</p>
   <div id="listas"></div>
 </main>
+
+<p class="rodape">Ministério de Louvor · Paz Church Embu-Guaçu</p>
 
 <script src="assets/dados.js"></script>
 <script>
@@ -22,7 +27,7 @@ const destino = document.getElementById("listas");
 
 for (const [grupo, pessoas] of Object.entries(GRUPOS)) {
   const titulo = document.createElement("h2");
-  titulo.textContent = "Grupo: " + grupo;
+  titulo.textContent = grupo;
   destino.appendChild(titulo);
 
   const tabela = document.createElement("table");
@@ -31,7 +36,7 @@ for (const [grupo, pessoas] of Object.entries(GRUPOS)) {
     const url = base + pessoa.token;
     const linha = tabela.insertRow();
     linha.insertCell().textContent = pessoa.nome;
-    linha.insertCell().innerHTML = '<code>' + url + '</code>';
+    linha.insertCell().innerHTML = "<code>" + url + "</code>";
     const botao = document.createElement("button");
     botao.textContent = "Copiar";
     botao.onclick = () => {

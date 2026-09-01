@@ -4,13 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Amigo Secreto da Semana</title>
+<title>Cuidar Uns dos Outros | Ministério de Louvor</title>
+<link rel="icon" href="assets/logo.png">
 <link rel="stylesheet" href="assets/estilo.css">
 </head>
 <body>
+<img class="marca" src="assets/logo.png" alt="Paz Church Embu-Guaçu">
+
 <main class="cartao" id="cartao">
-  <p class="rotulo">Carregando…</p>
+  <p class="subtitulo">Carregando…</p>
 </main>
+
+<p class="rodape">Ministério de Louvor · Paz Church Embu-Guaçu</p>
 
 <script src="assets/dados.js"></script>
 <script src="assets/sorteio.js"></script>
@@ -19,11 +24,20 @@ const cartao = document.getElementById("cartao");
 const token = new URLSearchParams(location.search).get("t") || "";
 const encontrado = buscarPorToken(token);
 
+const versiculo =
+  '<blockquote class="versiculo">' +
+  '“Para que não haja divisão no corpo, mas, antes, tenham os membros igual cuidado uns ' +
+  'pelos outros. De maneira que, se um membro padece, todos os membros padecem com ele; ' +
+  'e, se um membro é honrado, todos os membros se regozijam com ele.”' +
+  '<cite>1 Coríntios 12:25-26</cite></blockquote>';
+
 if (!encontrado) {
   cartao.innerHTML =
+    '<span class="selo">Cuidar uns dos outros</span>' +
     '<h1>Link inválido</h1>' +
-    '<p class="aviso erro">Esse link não corresponde a nenhum participante. ' +
-    'Confira se você copiou o endereço inteiro.</p>';
+    '<p class="subtitulo erro">Este link não corresponde a nenhum integrante do ministério. ' +
+    'Confira se o endereço foi copiado por inteiro.</p>' +
+    versiculo;
 } else {
   const semana = numeroDaSemana();
   const pares = sorteioDoGrupo(encontrado.pessoas, semana);
@@ -31,12 +45,21 @@ if (!encontrado) {
   const virada = formatarData(proximaSegunda());
 
   cartao.innerHTML =
+    '<span class="selo">Cuidar uns dos outros</span>' +
     '<h1>Olá, ' + encontrado.pessoa.nome + '!</h1>' +
-    '<p class="semana">Sorteio desta semana</p>' +
-    '<p class="rotulo">Você tirou</p>' +
-    '<p class="sorteado">' + sorteado + '</p>' +
-    '<p class="aviso">Guarde segredo! O próximo sorteio começa na segunda-feira, ' +
-    virada + '.</p>';
+    '<p class="subtitulo">Esta é a pessoa que você vai cuidar de forma especial nesta semana.</p>' +
+    '<div class="revelacao">' +
+      '<p class="rotulo">Você tirou</p>' +
+      '<p class="sorteado">' + sorteado + '</p>' +
+    '</div>' +
+    versiculo +
+    '<ul class="cuidados">' +
+      '<li><span class="icone">🙏</span><span>Ore por ela com mais intensidade durante a semana.</span></li>' +
+      '<li><span class="icone">💬</span><span>Mande uma mensagem e pergunte como ela está.</span></li>' +
+      '<li><span class="icone">❤️</span><span>Pergunte se ela precisa de algo ou tem algum pedido de oração.</span></li>' +
+    '</ul>' +
+    '<p class="aviso">Mais do que ministrarmos juntos, queremos cuidar uns dos outros como corpo ' +
+    'de Cristo. 🫶<br>Guarde segredo — o próximo sorteio começa na segunda-feira, ' + virada + '.</p>';
 }
 </script>
 </body>

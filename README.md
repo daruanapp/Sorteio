@@ -1,7 +1,16 @@
-# Sorteio semanal (estilo amigo secreto)
+# Cuidar Uns dos Outros — Ministério de Louvor · Paz Church Embu-Guaçu
 
-Site estático: cada participante abre o link individual dele e vê quem tirou naquela semana.
+> "Para que não haja divisão no corpo, mas, antes, tenham os membros igual cuidado uns pelos
+> outros." — 1 Coríntios 12:25-26
+
+Toda semana cada integrante do ministério tira uma pessoa (homens com homens, mulheres com
+mulheres) para cuidar de forma especial: orar por ela, mandar mensagem perguntando como está e
+se tem algum pedido de oração.
+
+Site estático: cada pessoa abre o link individual dela e vê quem tirou naquela semana.
 O sorteado muda automaticamente toda **segunda-feira, 00h (horário de Brasília)**.
+
+Identidade visual (azul-marinho, degradê azul-claro e logo) tirada dos materiais da igreja.
 
 ## Regras garantidas pelo algoritmo
 

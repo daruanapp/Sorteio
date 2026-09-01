@@ -4,13 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Sorteio completo</title>
+<title>Sorteio da semana</title>
+<link rel="icon" href="assets/logo.png">
 <link rel="stylesheet" href="assets/estilo.css">
 </head>
 <body>
+<img class="marca" src="assets/logo.png" alt="Paz Church Embu-Guaçu">
+
 <main class="cartao largo" id="cartao">
-  <p class="rotulo">Carregando…</p>
+  <p class="subtitulo">Carregando…</p>
 </main>
+
+<p class="rodape">Ministério de Louvor · Paz Church Embu-Guaçu</p>
 
 <script src="assets/dados.js"></script>
 <script src="assets/sorteio.js"></script>
@@ -19,18 +24,22 @@ const cartao = document.getElementById("cartao");
 const params = new URLSearchParams(location.search);
 
 if (params.get("k") !== TOKEN_ADMIN) {
-  cartao.innerHTML = '<h1>Acesso restrito</h1>' +
-    '<p class="aviso erro">Token de administrador inválido.</p>';
+  cartao.innerHTML =
+    '<span class="selo">Acesso restrito</span>' +
+    '<h1>Token inválido</h1>' +
+    '<p class="subtitulo erro">Esta página é só para a liderança do ministério.</p>';
 } else {
   // ?semana=N permite conferir semanas passadas ou futuras.
   const semana = params.has("semana") ? Number(params.get("semana")) : numeroDaSemana();
-  let html = '<h1>Sorteio completo — semana ' + semana + '</h1>' +
-    '<p class="aviso">Semana atual: ' + numeroDaSemana() +
-    '. Próxima virada: ' + formatarData(proximaSegunda()) +
-    '. Use <code>?k=…&semana=N</code> para ver outra semana.</p>';
+  let html =
+    '<span class="selo">Visão da liderança</span>' +
+    '<h1>Sorteio da semana ' + semana + '</h1>' +
+    '<p class="subtitulo">Semana atual: ' + numeroDaSemana() +
+    ' · próxima virada: ' + formatarData(proximaSegunda()) +
+    '. Use <code>&semana=N</code> para conferir outra semana.</p>';
 
   for (const [grupo, pessoas] of Object.entries(GRUPOS)) {
-    html += '<h2>Grupo: ' + grupo + '</h2><table><tr><th>Pessoa</th><th>Tirou</th></tr>';
+    html += '<h2>' + grupo + '</h2><table><tr><th>Pessoa</th><th>Cuida de</th></tr>';
     for (const par of sorteioDoGrupo(pessoas, semana)) {
       html += '<tr><td>' + par.de.nome + '</td><td>' + par.para.nome + '</td></tr>';
     }
